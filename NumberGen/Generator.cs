@@ -10,11 +10,17 @@ namespace NumberGen
     {
 
         List<int> GeneratedNumbers = new List<int>();
-        int number;
+        int number, minNum, maxNum;
         Random randomNumber = new Random(1);
 
         public void Run()
         {
+            Console.WriteLine("Please enter the minimum whole number to be generated");
+             int.TryParse(Console.ReadLine(), out minNum);
+
+            Console.WriteLine("Please enter the maximum whole number to be generated");
+            int.TryParse(Console.ReadLine(), out maxNum);
+
             while (true)
             {
                 Console.WriteLine("Enter G to Generate and Y to exit!");
@@ -24,7 +30,7 @@ namespace NumberGen
                 switch (Input.ToUpper())
                 {
                     case "G":
-                        Console.WriteLine(Generate());
+                        Console.WriteLine(Generate(minNum, maxNum));
                         break;
                     case "Y":
                         return;
@@ -36,20 +42,21 @@ namespace NumberGen
             }
         }
 
-        int Generate()
+        int Generate(int minNum, int maxNum)
         {
-                
+
+            while (true)
+            {
+                number = randomNumber.Next(1, 27);
+                if (!GeneratedNumbers.Contains(number))
+                {
+                    GeneratedNumbers.Add(number);
+                    return number;
+                }
+            }
           
-            number = randomNumber.Next(1,27);
-            if (!GeneratedNumbers.Contains(number))
-            {
-                GeneratedNumbers.Add(number);
-                return number;
-            }
-            else
-            {
-                return Generate();
-            }
+           
+            
 
            // return 0;
 
